@@ -1,0 +1,67 @@
+
+let tupfirst = function (a, b) ->
+	a
+;;
+
+let tupsecond = function (a, b) ->
+	b
+;;
+
+let next2 = function list ->
+	match list with
+	| a::b::tl -> [a;b]
+	| a::[] -> []
+	| [] -> []
+;;
+
+let remainder2 = function list ->
+	match list with
+	| a::b::tl -> tl
+	| a::[] -> []
+	| [] -> []
+;;
+
+let rec ct_eyys = function ( num, list) ->
+	match list with 
+	| a::b -> if a = 'a' then ct_eyys( num+1, b)
+		else (num, list)
+	| [] -> (0,[])
+;;
+
+let countAs = function list ->
+	match list with 
+	| a::b -> ct_eyys(0, list)
+	| [] -> (0,[])
+;;
+
+let rec ct_sayys = function ( num, list) ->
+	match list with 
+	| a::b -> if a = 'c' then ct_sayys( num+1, b)
+		else (num, list)
+	| [] -> (0,[])
+;;
+
+let countCs = function list ->
+	match list with 
+	| a::b -> ct_sayys(0, list)
+	| [] -> (0,[])
+;;
+
+let ac_check  = function list ->
+	match list with 
+	| a::b -> if a = 'a' && List.hd(b) = 'c' then true else false
+	| [] -> true
+;;	
+
+let rec rec_ack = function list ->
+	match list with
+	| a::b::c -> if ac_check( [a;b]) then rec_ack(c) else false
+	| a::[] -> false
+	| [] -> true
+;;
+
+let ack = function list ->
+	match list with 
+	| [_] -> rec_ack(list)
+	| [] -> false
+;;
