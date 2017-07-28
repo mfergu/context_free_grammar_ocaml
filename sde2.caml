@@ -25,7 +25,7 @@ let rec ct_eyys = function ( num, list) ->
 	match list with 
 	| a::b -> if a = 'a' then ct_eyys( num+1, b)
 		else (num, list)
-	| [] -> (0,[])
+	| [] -> (num,list)
 ;;
 
 let countAs = function list ->
@@ -38,7 +38,7 @@ let rec ct_sayys = function ( num, list) ->
 	match list with 
 	| a::b -> if a = 'c' then ct_sayys( num+1, b)
 		else (num, list)
-	| [] -> (0,[])
+	| [] -> (num,list)
 ;;
 
 let countCs = function list ->
@@ -62,6 +62,26 @@ let rec rec_ack = function list ->
 
 let ack = function list ->
 	match list with 
-	| [_] -> rec_ack(list)
+	| a::b -> rec_ack(list)
+	| [] -> false
+;;
+
+let real_ajck = function list ->
+	if tupfirst( countAs(list)) > 0 && tupfirst( countCs( tupsecond( countAs( list)))) > 0 && tupsecond( countCs( tupsecond( countAs( list)))) = [] then true else false				
+;;
+
+let ajck = function list ->
+	match list with
+	| a::b -> real_ajck list
+	| [] -> false
+;;
+
+let real_ckaj = function list ->
+	if tupfirst( countCs(list)) > 0 && tupfirst( countAs( tupsecond( countCs( list)))) > 0 && tupsecond( countAs( tupsecond( countCs( list)))) = [] then true else false				
+;;
+
+let ckaj = function list ->
+	match list with
+	| a::b -> real_ckaj list
 	| [] -> false
 ;;
